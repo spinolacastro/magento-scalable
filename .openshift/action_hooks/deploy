@@ -22,3 +22,31 @@ then
     exit 5
 fi
 
+# Install magento
+
+if [ ! -f ${OPENSHIFT_REPO_DIR}php/app/etc/local.xml ]; then
+
+	php -f ${OPENSHIFT_REPO_DIR}php/install.php -- \
+		--license_agreement_accepted "yes" \
+		--locale "pt_BR" \
+		--timezone "America/Sao_Paulo" \
+		--default_currency "BRL" \
+		--db_host "$OPENSHIFT_MYSQL_DB_HOST:$OPENSHIFT_MYSQL_DB_PORT" \
+		--db_name "$OPENSHIFT_APP_NAME" \
+		--db_user "$OPENSHIFT_MYSQL_DB_USERNAME" \
+		--db_pass "$OPENSHIFT_MYSQL_DB_PASSWORD" \
+		--skip_url_validation \
+		--url "http://$OPENSHIFT_APP_DNS" \
+		--use_rewrites "yes" \
+		--use_secure "yes" \
+		--enable_charts \
+		--session_save "db" \
+		--secure_base_url "https://$OPENSHIFT_APP_DNS" \
+		--use_secure_admin "yes" \
+		--admin_firstname "Test" \
+		--admin_lastname "Magento" \
+		--admin_email "foo@bar.com" \
+		--admin_username "admin" \
+		--admin_password "OpenShiftAdmin123"
+fi
+
