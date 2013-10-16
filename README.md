@@ -1,4 +1,4 @@
-magento-scalable
+Scalable Magento on GetupCloud
 ================
 
 Magento Store with Scalability
