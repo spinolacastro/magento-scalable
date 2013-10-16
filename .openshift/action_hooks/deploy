@@ -24,7 +24,9 @@ fi
 
 # Install magento
 
-if [ ! -f ${OPENSHIFT_REPO_DIR}php/app/etc/local.xml ]; then
+
+
+if ! mysql $OPENSHIFT_APP_NAME -e "show tables" | grep -q api_used ; then
 
 	php -f ${OPENSHIFT_REPO_DIR}php/install.php -- \
 		--license_agreement_accepted "yes" \
@@ -49,6 +51,8 @@ if [ ! -f ${OPENSHIFT_REPO_DIR}php/app/etc/local.xml ]; then
 		--admin_username "admin" \
 		--admin_password "OpenShiftAdmin123"
 fi
+
+
 
 /usr/bin/erb ${OPENSHIFT_REPO_DIR}php/app/etc/local.xml.erb > ${OPENSHIFT_REPO_DIR}php/app/etc/local.xml
 
