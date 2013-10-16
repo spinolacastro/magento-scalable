@@ -50,3 +50,5 @@ if [ ! -f ${OPENSHIFT_REPO_DIR}php/app/etc/local.xml ]; then
 		--admin_password "OpenShiftAdmin123"
 fi
 
+/usr/bin/erb ${OPENSHIFT_REPO_DIR}php/app/etc/local.xml.erb > ${OPENSHIFT_REPO_DIR}php/app/etc/local.xml
+
