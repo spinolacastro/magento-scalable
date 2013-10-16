@@ -26,7 +26,7 @@ fi
 
 
 
-if ! mysql $OPENSHIFT_APP_NAME -e "show tables" | grep -q api_used ; then
+if ! mysql -h $OPENSHIFT_MYSQL_DB_HOST -u $OPENSHIFT_MYSQL_DB_USERNAME -p$OPENSHIFT_MYSQL_DB_PASSWORD -POPENSHIFT_MYSQL_DB_PORT $OPENSHIFT_APP_NAME -e "show tables" | grep -q api_used ; then
 
 	php -f ${OPENSHIFT_REPO_DIR}php/install.php -- \
 		--license_agreement_accepted "yes" \
