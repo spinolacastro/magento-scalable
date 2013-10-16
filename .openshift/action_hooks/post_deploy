@@ -1,0 +1,13 @@
+#!/bin/bash
+# This is a simple post deploy hook executed after your application 
+# is deployed and started.  This script gets executed directly, so 
+# it could be python, php, ruby, etc.
+
+#reindex data
+if [ "$OPENSHIFT_GEAR_NAME" = "$OPENSHIFT_APP_NAME" ]; then
+	php ${OPENSHIFT_REPO_DIR}php/shell/indexer.php reindexall
+fi
+
+
+#run compilation 
+php ${OPENSHIFT_REPO_DIR}php/shell/compiler.php compile
